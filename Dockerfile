@@ -16,6 +16,8 @@ RUN apt-get update && \
 RUN update-rc.d -f tor remove
 RUN update-rc.d -f polipo remove
 
+COPY ./torrc /etc/tor/torrc
+
 RUN gem install excon -v 0.44.4
 
 ADD start.rb /usr/local/bin/start.rb
@@ -28,5 +30,6 @@ ADD haproxy.cfg.erb /usr/local/etc/haproxy.cfg.erb
 ADD uncachable /etc/polipo/uncachable
 
 EXPOSE 5566 4444
+
 
 CMD /usr/local/bin/start.rb
